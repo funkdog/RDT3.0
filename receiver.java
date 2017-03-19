@@ -33,26 +33,25 @@ public class receiver {
     message = "";
     Packets packet = new Packets();
     try {
-      input = buffer.readLine();
-
-      while(input != null) {
+      while((input = buffer.readLine()) != null) {
+        while (input.isEmpty()) {
+          input = buffer.readLine();
+        }
         if (input.equals("-1")) {
           writer.println(-1);
           break;
         }
         packet.parse(input);
-        message += packet.content;
+        message += packet.content + " ";
         packetsReceived++;
 
         output = "Waiting " + packet.sequenceNum + ", " + packetsReceived + ", " + input + ", " + packet.validate();
         System.out.println(output);
 
         writer.println(packet.validate());
-
-        if (packet.last) {
+        if (packet.last && message.charAt(message.length()-2) == '.') {
           System.out.println("Message: " + message);
         }
-        input = buffer.readLine();
       }
     } catch (IOException e) {
       e.printStackTrace();

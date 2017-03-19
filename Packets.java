@@ -9,6 +9,7 @@ public class Packets {
   int sequenceNum, packetID, checkSum;
   String content;
   boolean last;
+  String newline = System.getProperty("line.separator");
 
   public Packets() {
     this.sequenceNum = 1;
@@ -66,11 +67,13 @@ public class Packets {
 
   public void parse(String input) {
     String[] split = input.split("\\s+");
-    for (int i = 0; i < split.length; i++) {
-      sequenceNum = Integer.parseInt(split[0]);
-      packetID = Integer.parseInt(split[1]);
-      checkSum = Integer.parseInt(split[2]);
+    sequenceNum = Integer.parseInt(split[0]);
+    packetID = Integer.parseInt(split[1]);
+    checkSum = Integer.parseInt(split[2]);
+    if (split.length == 4) {
       content = split[3];
+    } else {
+      content = newline;
     }
   }
 

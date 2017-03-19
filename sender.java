@@ -6,7 +6,7 @@ import java.io.*;
 import java.net.*;
 
 public class sender {
-
+  String newline = System.getProperty("line.separator");
   Socket socket              = null;
   PrintWriter writer         = null;
   DataInputStream data       = null;
@@ -42,33 +42,44 @@ public class sender {
     int i;
     //
     Packets packets = new Packets();
-    input = buffer.readLine();
-    while (input != null) {
-      String[] split  = input.split("\\s+");
-      i = 0;
-      while(i < split.length) {
-        packets.createPacket(split[i]);
-        message = packets.generateMessage();
-        writer.println(message);
-        acknowledgement = bufferInput.readLine();
+    try {
+      input = (buffer.readLine());
+      while (input != null) {
+        System.out.println(input);
+        String[] temp  = input.trim().split("\\s+");
 
-        totalMessagesSent++;
-
-        if (acknowledgement.equals("ACK2")) {
-            System.out.println("Waiting: " + acknowledgement + ", " + totalMessagesSent + ", DROP, resend packet" + packets.sequenceNum + ".");
+        String[] split = new String[temp.length + 1];
+        for (int j = 0; j < temp.length; j++) {
+          split[j] = temp[j];
         }
-        else if (packets.validateAck(acknowledgement)) {
-          i++;
-          System.out.println("Waiting: " + acknowledgement + ", " + totalMessagesSent + ", " + acknowledgement + ", no more packets to send.");
+        split[temp.length] = newline;
+        i = 0;
+        while(i < split.length) {
+          packets.createPacket(split[i]);
+          message = packets.generateMessage();
+          writer.println(message);
+          acknowledgement = bufferInput.readLine();
+          System.out.println("Acknowledgement is: " + acknowledgement);
+          totalMessagesSent++;
+          if (acknowledgement.equals("ACK2")) {
+              System.out.println("Waiting: " + acknowledgement + ", " + totalMessagesSent + ", DROP, resend packet" + packets.sequenceNum + ".");
+          }
+          else if (packets.validateAck(acknowledgement)) {
+            i++;
+            System.out.println("Waiting: " + acknowledgement + ", " + totalMessagesSent + ", " + acknowledgement + ", no more packets to send.");
+          }
+          else {
+            System.out.println("Waiting: " + acknowledgement + ", " + totalMessagesSent + ", " + acknowledgement + ", send Packet " + packets.sequenceNum);
+          }
         }
-        else {
-          System.out.println("Waiting: " + acknowledgement + ", " + totalMessagesSent + ", " + acknowledgement + ", send Packet " + packets.sequenceNum);
-        }
+        input = (buffer.readLine());
       }
-      writer.println(-1);
-      input = buffer.readLine();
     }
-    data.close();
+    catch (EOFException e) {
+      writer.println(-1);
+      data.close();
+    }
+
   }
 
   public void closeAll() throws IOException {

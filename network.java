@@ -16,7 +16,10 @@ public class network {
       try {
         server = new ServerSocket(portNumber);
         System.out.println("Waiting... connect receiver");
-        new MessageThread(server.accept()).start();
+        MessageThread rec =  new MessageThread(server.accept());
+        MessageThread sen = new MessageThread(server.accept());
+        rec.start();
+        sen.start();
       }
       catch (Exception e) {
         System.err.println(e.getMessage());
@@ -33,6 +36,7 @@ public class network {
     final String ACK0 = "ACK0";
     final String ACK1 = "ACK1";
     final String ACK2 = "ACK2";
+    String newline = System.getProperty("line.separator");
 
     private Socket socket = null;
     MessageThread messageThread = null;
@@ -44,7 +48,7 @@ public class network {
       this.id = threads.size() - 1;
     }
 
-    public void run() {
+    public void run() throws NullPointerException{
       try {
         PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -57,7 +61,14 @@ public class network {
           if (input.equals("-1")) {
             break;
           }
+          if(input.isEmpty()) {
+            input = reader.readLine();
+          }
           String[] split = input.split("\\s+");
+          if (split.length == 3) {
+            input += " " + newline;
+            split = input.split("\\s+");
+          }
           double randomNum = Math.random();
 
           if (randomNum < 0.5 || split.length == 1) {
@@ -81,7 +92,10 @@ public class network {
           input = reader.readLine();
         }
         socket.close();
-      } catch (IOException e) {
+      } catch (NullPointerException e) {
+        toDifferentThread("-1");
+      }
+      catch (IOException e) {
         e.printStackTrace();
       }
     }
