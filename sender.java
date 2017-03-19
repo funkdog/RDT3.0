@@ -16,18 +16,15 @@ import java.net.*;
  *    main() - Used to create a sender that will read a file and send the message as packets to the server
  *
  * Properties:
- *    Socket
- *    PrintWriter
- *    BufferedReader
- *    DataInputStream
- *    FileInputStream
- *    newline
+ *    Socket socket - Connects this thread to the socket currently running on the server
+ *    PrintWriter writer - Used to output to the server socket so that messages can be sent to the receiver
+ *    BufferedReader buffer - The input from the file
+ *    BufferedReader bufferInput - The input from the socket
+ *    DataInputStream data - The stream of data coming in from the file
+ *    FileInputStream stream - Used to read the file from the directory
+ *    newline - New line character to be used when the end of the line has been located.
  */
 public class sender {
-  /**
-   * New line character to be used when the end of the line has been located.
-   */
-  String newline = System.getProperty("line.separator");
   /**
    * Connects this thread to the socket currently running on the server
    */
@@ -37,21 +34,25 @@ public class sender {
    */
   PrintWriter writer         = null;
   /**
-   * The stream of data coming in from the file
-   */
-  DataInputStream data       = null;
-  /**
    * The input from the file
    */
   BufferedReader buffer      = null;
   /**
-   * Used to read the file from the directory
-   */
-  FileInputStream stream     = null;
-  /**
    * The input from the socket
    */
   BufferedReader bufferInput = null;
+  /**
+  * The stream of data coming in from the file
+  */
+  DataInputStream data       = null;
+  /**
+  * Used to read the file from the directory
+  */
+  FileInputStream stream     = null;
+  /**
+  * New line character to be used when the end of the line has been located.
+  */
+  String newline = System.getProperty("line.separator");
 
   /**
    * Constructor that makes a valid connection to a port

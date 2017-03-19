@@ -1,0 +1,16 @@
+Waiting: ACK2, 0, DROP, resend packet0.
+Waiting: ACK1, 0, ACK1, no more packets to send.
+Waiting: ACK0, 0, ACK0, no more packets to send.
+Waiting: ACK2, 0, DROP, resend packet1.
+Waiting: ACK0, 0, ACK0, no more packets to send.
+Waiting: ACK1, 0, ACK1, no more packets to send.
+Waiting: ACK0, 0, ACK0, no more packets to send.
+Waiting: ACK1, 0, ACK1, no more packets to send.
+Waiting: ACK0, 0, ACK0, no more packets to send.
+Waiting: ACK2, 0, DROP, resend packet1.
+Waiting: ACK0, 0, ACK0, no more packets to send.
+Waiting: ACK1, 0, ACK1, no more packets to send.
+Waiting: ACK0, 0, ACK0, no more packets to send.
+Waiting: ACK1, 0, ACK1, no more packets to send.
+Waiting: ACK0, 0, ACK0, no more packets to send.
+Waiting: ACK1, 0, ACK1, no more packets to send.

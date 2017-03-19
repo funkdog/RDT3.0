@@ -1,0 +1,33 @@
+Waiting... connect receiver
+Get connection from: /127.0.0.1:56767
+Get connection from: /127.0.0.1:56778
+Received: Packet0, 1, DROP
+Received: ACK1, PASS
+Received: ACK1, PASS
+Received: ACK0, PASS
+Received: ACK0, PASS
+Received: Packet1, 4, DROP
+Received: ACK0, PASS
+Received: ACK0, PASS
+Received: ACK1, PASS
+Received: ACK1, PASS
+Received: Packet0, 7, CORRUPT
+Received: ACK0, PASS
+Received: Packet1, 8, CORRUPT
+Received: ACK1, PASS
+Received: ACK0, PASS
+Received: ACK0, PASS
+Received: Packet1, 10, DROP
+Received: ACK0, PASS
+Received: ACK0, PASS
+Received: ACK1, PASS
+Received: ACK1, PASS
+Received: Packet0, 13, CORRUPT
+Received: ACK0, PASS
+Received: Packet1, 14, CORRUPT
+Received: ACK1, PASS
+Received: Packet0, 15, CORRUPT
+Received: ACK0, PASS
+Received: ACK1, PASS
+Received: ACK1, PASS
+Received: ACK-1, PASS

@@ -14,9 +14,9 @@ import java.net.*;
  *    closeAll()- Close out all the open connections
  *    main()- Takes in two inputs, the host and the port
  * Properties:
- *    Socket
- *    PrintWriter
- *    BufferedReader
+ *    Socket socket -The socket that will be used to connect to the server socket
+ *    PrintWriter writer - Used to output to the server socket so that messages can be sent to the sender
+ *    BufferedReader buffer - The input from the socket
  */
 public class receiver {
   /**

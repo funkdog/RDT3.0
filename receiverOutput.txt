@@ -1,0 +1,19 @@
+Waiting... connect sender
+Waiting 1, 1, 1 2 95 1., ACK1
+Message: 1.
+Waiting 0, 2, 0 3 23 , ACK0
+Waiting 0, 3, 0 5 317 You, ACK0
+Waiting 1, 4, 1 6 312 are, ACK1
+Waiting 0, 5, 0 7 231 my, ACK1
+Waiting 1, 6, 1 8 924 sunshine., ACK0
+Message:
+ You are my sunshine.
+Waiting 0, 7, 0 9 23 , ACK0
+Waiting 0, 8, 0 11 96 2., ACK0
+Message:
+ 2.
+Waiting 1, 9, 1 12 23 , ACK1
+Waiting 0, 10, 0 13 199 My, ACK1
+Waiting 1, 11, 1 14 451 only, ACK0
+Waiting 0, 12, 0 15 878 sunshine, ACK1
+Waiting 1, 13, 1 16 23 , ACK1

@@ -9,7 +9,10 @@ import java.util.ArrayList;
 /**
  * Class: network
  * Functions:
- *      main
+ *      main - Creates a socket on the server on the designated port and then waits for a receiver and sender to join.
+ * Properties:
+ *      ArrayList threads - Array of MessageThreads containing the open threads on the network
+ *      server - The location where members who join the network will connect to.
  * Static Classes:
  *      MessageThread extends Thread
  */
@@ -24,9 +27,8 @@ public class network {
   static ServerSocket server;
 
   /**
-   * @param args Port number to create a network on.
-   *
    * Creates a socket on the server on the designated port and then waits for a receiver and sender to join.
+   * @param args Port number to create a network on.
    */
   public static void main(String[] args) {
     // Verify that the user has entered the proper number of arguments when creating an instance of the class.
