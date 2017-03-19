@@ -5,6 +5,26 @@
 import java.io.*;
 import java.net.*;
 
+/**
+ * Class: Packets
+ *
+ * Functions:
+ *    Constructor
+ *    createPacket(String) -
+ *    generateChecksum(String) -
+ *    validateAck(String) -
+ *    validate() -
+ *    parse(String) -
+ *    generateMessage()
+ * Properties:
+ *    int sequenceNum -
+ *    int packetID -
+ *    int checkSum -
+ *    String content -
+ *    boolean last -
+ *    String newline -
+ *
+ */
 public class Packets {
   int sequenceNum, packetID, checkSum;
   String content;
