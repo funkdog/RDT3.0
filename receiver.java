@@ -87,7 +87,7 @@ public class receiver {
         writer.println(packet.validate());
         // If the last packet has been sent and if the last character is a period print the message
         if (packet.last && message.charAt(message.length()-2) == '.') {
-          System.out.println("Message: " + message);
+          System.out.println("Message:\n" + message);
           message = "";
         }
       }

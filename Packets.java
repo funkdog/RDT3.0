@@ -122,7 +122,12 @@ public class Packets {
     sequenceNum = Integer.parseInt(split[0]);
     packetID = Integer.parseInt(split[1]);
     checkSum = Integer.parseInt(split[2]);
-    content = split[3];
+    if (split.length == 4) {
+      content = split[3];
+    }
+    else {
+      content = System.getProperty("line.separator");
+    }
 
   }
 
