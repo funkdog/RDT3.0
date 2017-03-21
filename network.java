@@ -39,10 +39,8 @@ public class network {
         server = new ServerSocket(portNumber);
         System.out.println("Waiting... connect receiver");
         // Start threads for the receiver and the sender to connect to
-        MessageThread rec = new MessageThread(server.accept());
-        MessageThread sen = new MessageThread(server.accept());
-        rec.start();
-        sen.start();
+        new MessageThread(server.accept()).start();
+        new MessageThread(server.accept()).start();
       }
       // If a server socket cannot be created catch the error and terminate gracefully
       catch (IOException e) {
@@ -75,10 +73,6 @@ public class network {
      * The string to compare to later on.
      */
     final String ACK2 = "ACK2";
-    /**
-     * New line character to be used when the end of the line has been located.
-     */
-    String newline = System.getProperty("line.separator");
     /**
      * Connects this thread to the socket currently running on the server
      */
@@ -116,11 +110,6 @@ public class network {
           }
           if (input.equals("-1")) {
             break;
-          }
-          // Ensure that the input is not an empty string
-          // Inputs should be in packet form when they come into the network
-          if(input.isEmpty()) {
-            input = reader.readLine();
           }
           // Remove spaces from the packet
           String[] split = input.split("\\s+");

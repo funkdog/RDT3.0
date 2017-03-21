@@ -43,6 +43,7 @@ public class receiver {
       this.socket = new Socket(hostName, portNumber);
       this.writer = new PrintWriter(socket.getOutputStream(), true);
       this.buffer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+      System.out.println("Waiting... connect sender");
     }
     catch (UnknownHostException e) {
      System.err.println("Cannot find the host: " + hostName);
@@ -57,7 +58,6 @@ public class receiver {
     String input, output, message;
     int packetsReceived = 0;
 
-    System.out.println("Waiting... connect sender");
     message = "";
     // Create a new packet
     Packets packet = new Packets();

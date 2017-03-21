@@ -91,17 +91,9 @@ public class sender {
     // Create a new packet object
     Packets packets = new Packets();
     try {
-      input = (buffer.readLine());
-      while (input != null && !input.isEmpty()) {
+      while ((input = buffer.readLine()) != null) {
         // Trim leading and trailing white spaces then split based on spaces
-        String[] temp  = input.trim().split("\\s+");
-        // Take the split string and copy it
-        String[] split = new String[temp.length + 1];
-        for (int j = 0; j < temp.length; j++) {
-          split[j] = temp[j];
-        }
-        // Add a new line to the end of each line read from the file
-        split[temp.length] = newline;
+        String[] split  = input.trim().split("\\s+");
         i = 0;
         while(i < split.length) {
           // Create a packet based on the split string
@@ -111,6 +103,7 @@ public class sender {
           // Send the message to the server
           writer.println(message);
           acknowledgement = bufferInput.readLine();
+          totalMessagesSent++;
           // Handle acknowledgement received
           if (acknowledgement.equals("ACK2")) {
               System.out.println("Waiting: " + acknowledgement + ", " + totalMessagesSent + ", DROP, resend packet" + packets.sequenceNum + ".");
@@ -123,14 +116,13 @@ public class sender {
             System.out.println("Waiting: " + acknowledgement + ", " + totalMessagesSent + ", " + acknowledgement + ", send Packet " + packets.sequenceNum);
           }
         }
-        input = (buffer.readLine());
       }
       writer.println(-1);
       data.close();
     }
     // End of the file has been reached. Terminate gracefully
     catch (EOFException e) {
-      writer.println("-1");
+      writer.println(-1);
       data.close();
     }
   }

@@ -22,7 +22,6 @@ import java.net.*;
  *    int checkSum - sum of the ascii character values of the string
  *    String content - The data that will be part of the message
  *    boolean last - True when the last packet is being sent
- *    String newline - Constant new line character
  */
 public class Packets {
   /**
@@ -39,11 +38,6 @@ public class Packets {
    * True when the last packet is being sent
    */
   boolean last;
-  /**
-   * Constant new line character
-   */
-  String newline = System.getProperty("line.separator");
-
   /**
    * Constructor to initialize the properties
    */
@@ -128,11 +122,8 @@ public class Packets {
     sequenceNum = Integer.parseInt(split[0]);
     packetID = Integer.parseInt(split[1]);
     checkSum = Integer.parseInt(split[2]);
-    if (split.length == 4) {
-      content = split[3];
-    } else {
-      content = newline;
-    }
+    content = split[3];
+
   }
 
   /**
