@@ -35,7 +35,7 @@
      - Functions:
        - Constructor - creates a new Message Thread
        - run() - Will be the driving force to allow the sender and the receiver to communicate.
-       - send(String) - Sends a messasge to the output socket
+       - send(String) - Sends a message to the output socket
        - toDifferentThread(String) - Sends message to the other thread executing on the network
      - Properties:
        - String ACK2 - constant
@@ -146,7 +146,7 @@
     Received: ACK-1, PASS
   ```
 
-  You'll notice that it connects and then begins transmitting the packets. One interesting note here is that the last log message is that the ACK-1 this is becuase I send a response of -1 when the last piece of data has been sent.
+  You'll notice that it connects and then begins transmitting the packets. One interesting note here is that the last log message is that the ACK-1 this is because I send a response of -1 when the last piece of data has been sent.
 
 **Run on sand**
   ``` text

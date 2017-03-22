@@ -22,52 +22,45 @@ import java.net.*;
  *    BufferedReader bufferInput - The input from the socket
  *    DataInputStream data - The stream of data coming in from the file
  *    FileInputStream stream - Used to read the file from the directory
- *    newline - New line character to be used when the end of the line has been located.
  */
-public class sender {
+class sender {
   /**
    * Connects this thread to the socket currently running on the server
    */
-  Socket socket              = null;
+  private Socket socket              = null;
   /**
    * Used to output to the server socket so that messages can be sent to the receiver
    */
-  PrintWriter writer         = null;
+  private PrintWriter writer         = null;
   /**
    * The input from the file
    */
-  BufferedReader buffer      = null;
+  private BufferedReader buffer      = null;
   /**
    * The input from the socket
    */
-  BufferedReader bufferInput = null;
+  private BufferedReader bufferInput = null;
   /**
   * The stream of data coming in from the file
   */
-  DataInputStream data       = null;
-  /**
-  * Used to read the file from the directory
-  */
-  FileInputStream stream     = null;
-  /**
-  * New line character to be used when the end of the line has been located.
-  */
-  String newline = System.getProperty("line.separator");
+  private DataInputStream data       = null;
 
   /**
    * Constructor that makes a valid connection to a port
-   * @param hostName
-   * @param portNumber
-   * @param file
-   * @throws IOException Thrown when the IO objects cannot be created properly
+   * @param hostName Name of the server to connect to
+   * @param portNumber Port on which to connect
+   * @param file The file that contains the message to be sent
    */
-  public sender(String hostName, int portNumber, String file) throws IOException {
+  private sender(String hostName, int portNumber, String file) {
     try {
       this.socket = new Socket(hostName, portNumber);
       this.writer = new PrintWriter(socket.getOutputStream(), true);
       this.bufferInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      this.stream = new FileInputStream(file);
-      this.data = new DataInputStream(this.stream);
+      /*
+   Used to read the file from the directory
+  */
+      FileInputStream stream = new FileInputStream(file);
+      this.data = new DataInputStream(stream);
       this.buffer = new BufferedReader(new InputStreamReader(this.data));
     }
     catch (UnknownHostException e) {
@@ -81,10 +74,10 @@ public class sender {
   /**
    * Creates packets that will be sent to the server and sends them to the server.
    * Also receives responses from the server
-   * @throws IOException
+   * @throws IOException Occurs if read or write do not work
    */
   // Actually sends the packets. Handles dropping packets and corrupt packets
-  public void sendPackets() throws IOException {
+  private void sendPackets() throws IOException {
     String acknowledgement, input, message;
     int totalMessagesSent = 0;
     int i;
@@ -129,9 +122,9 @@ public class sender {
 
   /**
    * Close all the open connections
-   * @throws IOException
+   * @throws IOException Thrown if the objects cannot close properly
    */
-  public void closeAll() throws IOException {
+  private void closeAll() throws IOException {
       this.writer.close();
       this.bufferInput.close();
       this.socket.close();
@@ -140,7 +133,7 @@ public class sender {
 
   /**
    * Used to create a sender that will read a file and send the message as packets to the server
-   * @param args
+   * @param args Host, port, and file name
    */
   public static void main(String[] args) {
     // Verify that there are three input arguments

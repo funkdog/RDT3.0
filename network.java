@@ -16,17 +16,13 @@ import java.util.ArrayList;
  * Static Classes:
  *      MessageThread extends Thread
  */
-public class network {
+class network {
   /**
    * Array of MessageThreads containing the open threads on the network
    */
-  static ArrayList<MessageThread> threads = new ArrayList<MessageThread>();
-  /**
-   * The location where members who join the network will connect to.
-   */
-  static ServerSocket server;
+  private static ArrayList<MessageThread> threads = new ArrayList<>();
 
-  /**
+    /**
    * Creates a socket on the server on the designated port and then waits for a receiver and sender to join.
    * @param args Port number to create a network on.
    */
@@ -36,7 +32,10 @@ public class network {
       int portNumber = Integer.parseInt(args[0]);
       // Try to create a server socket for others to connect to
       try {
-        server = new ServerSocket(portNumber);
+        /*
+    The location where members who join the network will connect to.
+   */
+          ServerSocket server = new ServerSocket(portNumber);
         System.out.println("Waiting... connect receiver");
         // Start threads for the receiver and the sender to connect to
         new MessageThread(server.accept()).start();
@@ -59,13 +58,12 @@ public class network {
    * Helper class that spins off new threads so that sender and receiver run on isolated threads but the same network
    * Properties:
    *    String ACK2 - constant
-   *    String newline - constant
    *    Socket socket - The socket that the network has opened
    *    int id - used to identify which thread this is
    * Functions:
    *    Constructor - creates a new Message Thread
    *    run() - Will be the driving force to allow the sender and the receiver to communicate.
-   *    send(String) - Sends a messasge to the output socket
+   *    send(String) - Sends a message to the output socket
    *    toDifferentThread(String) - Sends message to the other thread executing on the network
    */
   public static class MessageThread extends Thread {
@@ -140,7 +138,7 @@ public class network {
             writer.println(ACK2);
           }
         }
-        // Close the socket once all packets ahve been sent and received
+        // Close the socket once all packets have been sent and received
         socket.close();
       }
       // Catch IO Exceptions generated from the writers and readers
@@ -150,7 +148,7 @@ public class network {
     }
 
     /**
-     * Sends a messasge to the output socket
+     * Sends a message to the output socket
      * @param message The message to send to the output stream
      */
     public void send(String message) {
@@ -169,10 +167,10 @@ public class network {
      */
     public void toDifferentThread(String message) {
       if (id == 0) {
-        ((MessageThread) threads.get(1)).send(message);
+        threads.get(1).send(message);
       }
       else {
-        ((MessageThread) threads.get(0)).send(message);
+        threads.get(0).send(message);
       }
     }
   }

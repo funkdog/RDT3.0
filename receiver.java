@@ -18,19 +18,19 @@ import java.net.*;
  *    PrintWriter writer - Used to output to the server socket so that messages can be sent to the sender
  *    BufferedReader buffer - The input from the socket
  */
-public class receiver {
+class receiver {
   /**
    * The socket that will be used to connect to the server socket
    */
-  Socket socket         = null;
+  private Socket socket         = null;
   /**
    * Used to output to the server socket so that messages can be sent to the sender
    */
-  PrintWriter writer    = null;
+  private PrintWriter writer    = null;
   /**
    * The input from the socket
    */
-  BufferedReader buffer = null;
+  private BufferedReader buffer = null;
 
   /**
    * Constructor that makes a receiver based on the host name and port number
@@ -38,7 +38,7 @@ public class receiver {
    * @param portNumber port number that the socket is running on
    * @throws IOException if host name cannot be reached or other fields cannot be created
    */
-  public receiver(String hostName, int portNumber) throws IOException {
+  private receiver(String hostName, int portNumber) throws IOException {
     try {
       this.socket = new Socket(hostName, portNumber);
       this.writer = new PrintWriter(socket.getOutputStream(), true);
@@ -54,7 +54,7 @@ public class receiver {
   /**
    * Handles the reception of packets from the network server.
    */
-  public void run() {
+  private void run() {
     String input, output, message;
     int packetsReceived = 0;
 
@@ -70,7 +70,6 @@ public class receiver {
         }
         // Handle exit command
         if (input.equals("-1")) {
-          writer.println(-1);
           break;
         }
         // Parse the packet since it is not an exit command
@@ -87,7 +86,7 @@ public class receiver {
         writer.println(packet.validate());
         // If the last packet has been sent and if the last character is a period print the message
         if (packet.last && message.charAt(message.length()-2) == '.') {
-          System.out.println("Message:\n" + message);
+          System.out.println("Message:\n" + message + "\n");
           message = "";
         }
       }
@@ -98,9 +97,9 @@ public class receiver {
 
   /**
    *  Close out all the open connections
-   * @throws IOException
+   * @throws IOException Thrown when the close cannot be successfully completed.
    */
-  public void closeAll() throws IOException {
+  private void closeAll() throws IOException {
     this.writer.close();
     this.buffer.close();
     this.socket.close();

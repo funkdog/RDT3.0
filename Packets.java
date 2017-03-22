@@ -2,9 +2,6 @@
 // CNT 4007C - Network Fundamentals
 // Programming Assignment 2 - RDT 3.0
 
-import java.io.*;
-import java.net.*;
-
 /**
  * Class: Packets
  *
@@ -23,13 +20,15 @@ import java.net.*;
  *    String content - The data that will be part of the message
  *    boolean last - True when the last packet is being sent
  */
-public class Packets {
+class Packets {
   /**
    * sequenceNum - alternating 0 or 1 for each packet
    * packetID - the current number of packets
    * checkSum - sum of the ascii character values of the string
    */
-  int sequenceNum, packetID, checkSum;
+  int sequenceNum;
+  private int packetID;
+  int checkSum;
   /**
    * The data that will be part of the message
    */
@@ -71,7 +70,7 @@ public class Packets {
    * @param content The data part of the string
    * @return the total sum
    */
-  public int generateChecksum(String content) {
+  private int generateChecksum(String content) {
     int ascii = 0;
     int sum = 0;
     for (int i = 0; i < content.length() ; i++ ) {
